@@ -11,7 +11,8 @@ import com.xworkz.stadium.dto.StadiumDTO;
 public interface StadiumService {
 	
 	Set<ConstraintViolation<StadiumDTO>>validateAndSave(StadiumDTO dto);
-	
+	Set<ConstraintViolation<StadiumDTO>>validateAndUpdate(StadiumDTO dto);
+
 	default StadiumDTO findById(int id) {
 	return null;
 	}

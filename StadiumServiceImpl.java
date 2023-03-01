@@ -103,9 +103,36 @@ public class StadiumServiceImpl implements StadiumService {
 }
 		return StadiumService.super.findByGames(games);
 }
+	
+
+	@Override
+	public Set<ConstraintViolation<StadiumDTO>> validateAndUpdate(StadiumDTO dto) {
+    
+    ValidatorFactory factory=Validation.buildDefaultValidatorFactory();
+    Validator validator=factory.getValidator();
+    Set<ConstraintViolation<StadiumDTO>> violations = validator.validate(dto);
+    	
+    if(violations != null && !violations.isEmpty()) {
+    System.err.println("Violations in DTO " + dto);
+    return violations;
+    }
+    
+    else {
+    System.out.println("violations are not there in dto and can save data");
+    StadiumEntity entity=new StadiumEntity();
+    entity.setGames(dto.getGames());
+    entity.setName(dto.getName());
+    entity.setTracklength(dto.getTracklength());
+    entity.setCity(dto.getCity());
+    entity.setState(dto.getState());
+    entity.setId(dto.getId());
+    boolean saved=this.stadiumRepository.update(entity);
+    System.out.println("Entity data is saved"+saved);
+    return Collections.emptySet();
+    }
 }
 	
-	
+}
 	
 	
 
