@@ -76,4 +76,30 @@ private List<String> state=Arrays.asList("Jarkhand","Gujarat","Westbengal","Chha
     	
     	return"GamesSearch";
     }
+    
+    @GetMapping("/update")
+    public String onUpdate(@RequestParam int id,Model model) {
+    	
+    	System.out.println("running onUpdate"+id);
+    	StadiumDTO dto=this.stadiumService.findById(id);
+    	model.addAttribute("city", city);
+    	model.addAttribute("state", state);
+    	model.addAttribute("dto", dto);
+    	
+    	return "UpdateStadium";
+    	}
+@PostMapping("/update")
+public String onUpdate(StadiumDTO dto, Model model) {
+	System.out.println("Running onUpdate" + dto);
+	Set<ConstraintViolation<StadiumDTO>> constraintViolations=this.stadiumService.validateAndUpdate(dto);
+	
+	if(constraintViolations.size() >0) {
+	model.addAttribute("errors", constraintViolations);
+	}
+	else {
+	model.addAttribute("message", "Stadium Update Success..");
+	}
+	return "UpdateStadium";
+    
+}
 }
