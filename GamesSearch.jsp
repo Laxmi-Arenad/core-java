@@ -45,17 +45,18 @@ Search By games<input type="text" name="games"/>
 </form>
 <div>
 
-<table>
+<table class="table">
 <tr>
-<th>ID</th>
-<th>Games</th>
-<th>Name</th>
-<th>City</th>
-<th>State</th>
-<th>Tracklength</th>
+<th scope="col">ID</th>
+<th scope="col">Games</th>
+<th scope="col">Name</th>
+<th scope="col">City</th>
+<th scope="col">State</th>
+<th scope="col">Tracklength</th>
+<th scope="col">Edit</th>
 </tr>
-
 <c:forEach items="${list}" var="s">
+
 <tr>
 <td>${s.id}</td>
 <td>${s.games}</td>
@@ -63,6 +64,7 @@ Search By games<input type="text" name="games"/>
 <td>${s.city}</td>
 <td>${s.state}</td>
 <td>${s.tracklength}</td>
+<td><a href="update?id=${s.id }">Edit</a> </td>
 </tr>
 </c:forEach>
 </table>

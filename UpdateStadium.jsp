@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,19 +23,43 @@
 <body  style="color:blue">
 <nav class="navbar navbar-light bg-dark">
 		<div class="container-fluid">
+		
 			<a class="navbar-brand" href="#"> <img
                     src=  https://www.mistay.in/travel-blog/content/images/2020/08/Melbourne.jpg
+
 				alt="" width="85" height="50" class="d-inline-block align text-top">
-			</a> <a href="stadium">Stadium</a>
-			<a href="StadiumSearch.jsp">StadiumSearch</a>
-			<a href="GamesSearch.jsp">GamesSearch</a>
-			<a href="UpdateStadium.jsp">UpdateStadium</a>
-			
+			</a> <a href="index.jsp">Home</a>
 		</div>
 	</nav>
-	<h1>Welcome to Stadium </h1>
-
-
+	<h2>Welcome to Stadium save data.. </h2>
+	<c:forEach items="${error}" var="e">
+	<span style="color:red">;${e.message}</span><br>
+	</c:forEach>
+	
+	<form action="stadium" method="post">
+	<pre>
+	Games<input type="text" name="games" value="${dto.games}"/>
+	Name<input type="text" name="name" value="${dto.name}"/>
+	Tracklength<input type="number" name="tracklength" value="${dto.tracklength}"/>
+	
+	City<select name="city">
+	<option value="">Select</option>
+	<c:forEach items="${city}" var="c">
+	<option value="${c}">${c}</option>
+	</c:forEach>
+	</select>
+	
+	State<select name="state">
+	<option value="">Select</option>
+	<c:forEach items="${state}" var="s">
+	<option value="${s}">${s}</option>
+	</c:forEach>
+	</select>
+	</pre>
+	
+	<input type="submit" value="Update" class="btn btn-secondary"/>
+	
+	</form>
+	
 </body>
 </html>
-
