@@ -63,10 +63,29 @@ public class StadiumRepositoryImpl implements StadiumRepository {
 	
 	}finally {
 		manager.close();
-		
+  System.out.println("released the connection...")	;	
 }
+	}
+@Override
+public boolean update(StadiumEntity entity) {
+	EntityManager manager=this.entityManagerFactory.createEntityManager();
+	//DECIDE
+	try {
+		EntityTransaction transaction=manager.getTransaction();
+		transaction.begin();
+		manager.merge(entity);
+		transaction.commit();
+		return true;
+		
+	}finally {
+	   manager.close();	
+		
+	}
+	
+	
 	
 }
+
 }
 
 

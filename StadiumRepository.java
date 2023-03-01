@@ -9,6 +9,7 @@ import com.xworkz.stadium.entity.StadiumEntity;
 public interface StadiumRepository {
 	
 	boolean save(StadiumEntity entity);
+	boolean update(StadiumEntity entity);
 
 	default StadiumEntity findById(int id) {
 		return null;
